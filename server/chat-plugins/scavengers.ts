@@ -340,15 +340,16 @@ export class ScavengerHunt extends Rooms.RoomGame<ScavengerHuntPlayer> {
 	readonly checkChat = true;
 
 	[k: string]: any; // for purposes of adding new temporary properties for the purpose of twists.
-	constructor(
+	constructor({room, staffHost, hosts, gameType, questions, isHTML, mod}:
+	{
 		room: Room,
 		staffHost: User | FakeUser,
 		hosts: FakeUser[],
 		gameType: GameTypes,
 		questions: (string | string[])[],
-		isHTML? : boolean,
-		mod?: string | string[]
-	) {
+		isHTML?: boolean,
+		mod?: string | string[],
+	}) {
 		super(room);
 
 		this.allowRenames = true;
@@ -365,7 +366,7 @@ export class ScavengerHunt extends Rooms.RoomGame<ScavengerHuntPlayer> {
 
 		this.hosts = hosts;
 
-		this.isHTML = isHTML ? isHTML : false;
+		this.isHTML = !!isHTML;
 
 		this.modsList = [];
 		this.mods = {};
@@ -736,6 +737,7 @@ export class ScavengerHunt extends Rooms.RoomGame<ScavengerHuntPlayer> {
 				hosts: next.hosts,
 				questions: correctlyFormattedQuestions,
 				staffHostId: 'scavengermanager',
+				isHTML: next.isHTML,
 				staffHostName: 'Scavenger Manager',
 				gameType: 'unrated',
 			});
@@ -826,11 +828,14 @@ export class ScavengerHunt extends Rooms.RoomGame<ScavengerHuntPlayer> {
 				const next = room.settings.scavQueue.shift()!;
 				const duration = room.settings.scavSettings?.defaultScavTimer || DEFAULT_TIMER_DURATION;
 				room.game = new ScavengerHunt(
-					room,
-					{id: next.staffHostId, name: next.staffHostName},
-					next.hosts,
-					next.gameType,
-					next.questions
+					{
+						room: room,
+						staffHost: {id: next.staffHostId, name: next.staffHostName},
+						hosts: next.hosts,
+						gameType: next.gameType,
+						questions: next.questions,
+						isHTML: next.isHTML,
+					}
 				);
 				const game = room.getGame(ScavengerHunt);
 				if (game) {
@@ -1378,7 +1383,7 @@ const ScavengerCommands: Chat.ChatCommands = {
 			gameType = 'recycled';
 		}
 
-		let isHTML = cmd.includes('html');
+		const isHTML = cmd.includes('html');
 
 		let mod;
 		let questions = target;
@@ -1431,7 +1436,17 @@ const ScavengerCommands: Chat.ChatCommands = {
 		const res = ScavengerHunt.parseQuestions(params);
 		if (res.err) return this.errorReply(res.err);
 
-		room.game = new ScavengerHunt(room, user, hosts, gameType, res.result, isHTML, mod);
+		room.game = new ScavengerHunt(
+			{
+				room: room,
+				staffHost: user,
+				hosts: hosts,
+				gameType: gameType,
+				questions: res.result,
+				isHTML: isHTML,
+				mod: mod,
+			}
+		);
 
 		this.privateModAction(`A new scavenger hunt was created by ${user.name}.`);
 		this.modlog('SCAV NEW', null, `${gameType.toUpperCase()}: creators - ${hosts.map(h => h.id)}`);
@@ -1740,7 +1755,7 @@ const ScavengerCommands: Chat.ChatCommands = {
 			return this.parse('/scavhelp staff');
 		}
 
-		let isHTML = this.cmd.includes('html');
+		const isHTML = this.cmd.includes('html');
 
 		this.checkCan('mute', null, room);
 
@@ -1764,7 +1779,7 @@ const ScavengerCommands: Chat.ChatCommands = {
 			room.settings.scavQueue.push({
 				hosts: next.hosts,
 				questions: correctlyFormattedQuestions,
-				isHTML: this.cmd.includes('html'),
+				isHTML: isHTML,
 				staffHostId: 'scavengermanager',
 				staffHostName: 'Scavenger Manager',
 				gameType: 'unrated',
@@ -1841,12 +1856,14 @@ const ScavengerCommands: Chat.ChatCommands = {
 
 		const next = room.settings.scavQueue.splice(huntId, 1)[0];
 		room.game = new ScavengerHunt(
-			room,
-			{id: next.staffHostId, name: next.staffHostName},
-			next.hosts,
-			next.gameType,
-			next.questions,
-			next.isHTML
+			{
+				room: room,
+				staffHost: {id: next.staffHostId, name: next.staffHostName},
+				hosts: next.hosts,
+				gameType: next.gameType,
+				questions: next.questions,
+				isHTML: next.isHTML,
+			}
 		);
 
 		if (huntId) this.sendReply(`|uhtmlchange|scav-queue|${formatQueue(room.settings.scavQueue, user, room)}`);
@@ -2532,6 +2549,7 @@ export const commands: Chat.ChatCommands = {
 	// old game aliases
 	scavenge: ScavengerCommands.guess,
 	startpracticehunt: 'starthunt',
+	startofficial: 'starthunt',
 	startofficialhunt: 'starthunt',
 	startminihunt: 'starthunt',
 	startunratedhunt: 'starthunt',
@@ -2547,6 +2565,7 @@ export const commands: Chat.ChatCommands = {
 	forcestartpractice: 'starthunt',
 
 	starthtmlpracticehunt: 'starthunt',
+	starthtmlofficial: 'starthunt',
 	starthtmlofficialhunt: 'starthunt',
 	starthtmlminihunt: 'starthunt',
 	starthtmlunratedhunt: 'starthunt',
