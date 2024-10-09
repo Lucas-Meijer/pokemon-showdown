@@ -42,7 +42,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	darkvoid: {
 		inherit: true,
-		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
+		noSketch: false,
 	},
 	decorate: {
 		inherit: true,
@@ -90,7 +90,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	hyperspacefury: {
 		inherit: true,
-		flags: {mirror: 1, bypasssub: 1},
+		noSketch: false,
 	},
 	iceburn: {
 		inherit: true,
@@ -140,7 +140,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 	},
 	revivalblessing: {
 		inherit: true,
-		flags: {heal: 1},
+		noSketch: false,
 	},
 	rockwrecker: {
 		inherit: true,

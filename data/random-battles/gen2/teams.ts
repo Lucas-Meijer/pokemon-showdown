@@ -140,7 +140,7 @@ export class RandomGen2Teams extends RandomGen3Teams {
 	// Generate random moveset for a given species, role, preferred type.
 	randomMoveset(
 		types: string[],
-		abilities: string[],
+		abilities: Set<string>,
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
 		isLead: boolean,
@@ -362,6 +362,7 @@ export class RandomGen2Teams extends RandomGen3Teams {
 	): string {
 		// First, the high-priority items
 		if (species.id === 'ditto') return 'Metal Powder';
+		if (species.id === 'farfetchd') return 'Stick';
 		if (species.id === 'marowak') return 'Thick Club';
 		if (species.id === 'pikachu') return 'Light Ball';
 
@@ -401,7 +402,7 @@ export class RandomGen2Teams extends RandomGen3Teams {
 		const ivs = {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30};
 
 		const types = species.types;
-		const abilities: string[] = [];
+		const abilities = new Set(Object.values(species.abilities));
 
 		// Get moves
 		const moves = this.randomMoveset(types, abilities, teamDetails, species, isLead, movePool,

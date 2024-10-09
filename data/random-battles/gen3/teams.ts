@@ -1,4 +1,5 @@
 import RandomGen4Teams from '../gen4/teams';
+import {Utils} from '../../../lib';
 import {PRNG, PRNGSeed} from '../../../sim/prng';
 import type {MoveCounter} from '../gen8/teams';
 
@@ -63,7 +64,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 	cullMovePool(
 		types: string[],
 		moves: Set<string>,
-		abilities: string[],
+		abilities: Set<string>,
 		counter: MoveCounter,
 		movePool: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
@@ -164,7 +165,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 	// Generate random moveset for a given species, role, preferred type.
 	randomMoveset(
 		types: string[],
-		abilities: string[],
+		abilities: Set<string>,
 		teamDetails: RandomTeamsTypes.TeamDetails,
 		species: Species,
 		isLead: boolean,
@@ -206,7 +207,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		// Add other moves you really want to have, e.g. STAB, recovery, setup.
 
 		// Enforce Seismic Toss and Spore
-		for (const moveid of ['seismictoss', 'spikes', 'spore']) {
+		for (const moveid of ['seismictoss', 'spore']) {
 			if (movePool.includes(moveid)) {
 				counter = this.addMove(moveid, moves, types, abilities, teamDetails, species, isLead,
 					movePool, preferredType, role);
@@ -388,7 +389,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		ability: string,
 		types: Set<string>,
 		moves: Set<string>,
-		abilities: string[],
+		abilities: Set<string>,
 		counter: MoveCounter,
 		movePool: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
@@ -397,12 +398,26 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		role: RandomTeamsTypes.Role
 	) {
 		switch (ability) {
+		case 'Rain Dish': case 'Sand Veil': case 'Soundproof': case 'Sticky Hold':
+			return true;
 		case 'Chlorophyll':
-			return !teamDetails.sun;
+			return !moves.has('sunnyday') && !teamDetails.sun;
+		case 'Hustle':
+			return !counter.get('Physical');
 		case 'Rock Head':
 			return !counter.get('recoil');
+		case 'Swarm':
+			return !counter.get('Bug');
 		case 'Swift Swim':
-			return !teamDetails.rain;
+			return (
+				// Relicanth always wants Swift Swim if it doesn't have Double-Edge
+				!moves.has('raindance') && !teamDetails.rain && !(species.id === 'relicanth' && !counter.get('recoil')) ||
+				!moves.has('raindance') && abilities.has('Water Absorb')
+			);
+		case 'Thick Fat':
+			return (species.id === 'snorlax' || (species.id === 'hariyama' && moves.has('sleeptalk')));
+		case 'Water Absorb':
+			return (species.id === 'mantine' && moves.has('raindance'));
 		}
 
 		return false;
@@ -412,7 +427,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 	getAbility(
 		types: Set<string>,
 		moves: Set<string>,
-		abilities: string[],
+		abilities: Set<string>,
 		counter: MoveCounter,
 		movePool: string[],
 		teamDetails: RandomTeamsTypes.TeamDetails,
@@ -420,32 +435,47 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		preferredType: string,
 		role: RandomTeamsTypes.Role,
 	): string {
-		if (abilities.length <= 1) return abilities[0];
+		const abilityData = Array.from(abilities).map(a => this.dex.abilities.get(a));
+		Utils.sortBy(abilityData, abil => -abil.rating);
+
+		if (abilityData.length <= 1) return abilityData[0].name;
 
 		// Hard-code abilities here
-		if (species.id === 'yanma') return counter.get('inaccurate') ? 'Compound Eyes' : 'Speed Boost';
+		if (species.id === 'yanma' && counter.get('inaccurate')) return 'Compound Eyes';
+		if (moves.has('rest') && abilities.has('Early Bird')) return 'Early Bird';
+		if (species.id === 'arcanine') return 'Intimidate';
+		if (species.id === 'blissey') return 'Natural Cure';
+		if (species.id === 'heracross' && role === 'Berry Sweeper') return 'Swarm';
+		if (species.id === 'xatu') return 'Synchronize';
 
-		const abilityAllowed: string[] = [];
+		let abilityAllowed: Ability[] = [];
 		// Obtain a list of abilities that are allowed (not culled)
-		for (const ability of abilities) {
-			if (!this.shouldCullAbility(
-				ability, types, moves, abilities, counter, movePool, teamDetails, species, preferredType, role
+		for (const ability of abilityData) {
+			if (ability.rating >= 1 && !this.shouldCullAbility(
+				ability.name, types, moves, abilities, counter, movePool, teamDetails, species, preferredType, role
 			)) {
 				abilityAllowed.push(ability);
 			}
 		}
 
-		// Pick a random allowed ability
-		if (abilityAllowed.length >= 1) return this.sample(abilityAllowed);
-
-		// If all abilities are rejected, prioritize weather abilities over non-weather abilities
+		// If all abilities are rejected, re-allow all abilities
 		if (!abilityAllowed.length) {
-			const weatherAbilities = abilities.filter(a => ['Chlorophyll', 'Swift Swim'].includes(a));
-			if (weatherAbilities.length) return this.sample(weatherAbilities);
+			for (const ability of abilityData) {
+				if (ability.rating > 0) abilityAllowed.push(ability);
+			}
+			if (!abilityAllowed.length) abilityAllowed = abilityData;
 		}
 
-		// Pick a random ability
-		return this.sample(abilities);
+		if (abilityAllowed.length === 1) return abilityAllowed[0].name;
+		// Sort abilities by rating with an element of randomness
+		if (abilityAllowed[0].rating <= abilityAllowed[1].rating) {
+			if (this.randomChance(1, 2)) [abilityAllowed[0], abilityAllowed[1]] = [abilityAllowed[1], abilityAllowed[0]];
+		} else if (abilityAllowed[0].rating - 0.5 <= abilityAllowed[1].rating) {
+			if (this.randomChance(1, 3)) [abilityAllowed[0], abilityAllowed[1]] = [abilityAllowed[1], abilityAllowed[0]];
+		}
+
+		// After sorting, choose the first ability
+		return abilityAllowed[0].name;
 	}
 
 	getItem(
@@ -542,7 +572,7 @@ export class RandomGen3Teams extends RandomGen4Teams {
 		const ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
 
 		const types = species.types;
-		const abilities = set.abilities!;
+		const abilities = new Set(Object.values(species.abilities));
 
 		// Get moves
 		const moves = this.randomMoveset(types, abilities, teamDetails, species, isLead, movePool,

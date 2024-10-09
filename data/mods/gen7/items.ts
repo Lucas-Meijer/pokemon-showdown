@@ -80,7 +80,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 	},
 	blukberry: {
 		inherit: true,
-		isNonstandard: null,
+		isNonstandard: "Unobtainable",
 	},
 	buggem: {
 		inherit: true,
@@ -451,7 +451,7 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 	},
 	pinapberry: {
 		inherit: true,
-		isNonstandard: null,
+		isNonstandard: "Unobtainable",
 	},
 	pinsirite: {
 		inherit: true,

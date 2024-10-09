@@ -223,7 +223,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "LC",
 	},
 	arcanine: {
-		tier: "RU",
+		tier: "UU",
 		doublesTier: "DOU",
 	},
 	poliwag: {
@@ -257,7 +257,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "NFE",
 	},
 	machamp: {
-		tier: "UU",
+		tier: "RU",
 		doublesTier: "DUU",
 	},
 	bellsprout: {
@@ -274,7 +274,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "LC",
 	},
 	tentacruel: {
-		tier: "RU",
+		tier: "UU",
 		doublesTier: "DUU",
 	},
 	geodude: {
@@ -540,7 +540,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "LC",
 	},
 	gyarados: {
-		tier: "UU",
+		tier: "RUBL",
 		doublesTier: "DOU",
 	},
 	lapras: {
@@ -567,7 +567,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		doublesTier: "DUU",
 	},
 	espeon: {
-		tier: "RU",
+		tier: "UU",
 		doublesTier: "DUU",
 	},
 	umbreon: {
@@ -770,7 +770,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "LC",
 	},
 	ambipom: {
-		tier: "RU",
+		tier: "UU",
 		doublesTier: "DUU",
 	},
 	sunkern: {
@@ -1241,7 +1241,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		doublesTier: "DUU",
 	},
 	torkoal: {
-		tier: "RU",
+		tier: "UU",
 		doublesTier: "DOU",
 	},
 	spoink: {
@@ -1370,7 +1370,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "LC",
 	},
 	chimecho: {
-		tier: "PU",
+		tier: "PUBL",
 		doublesTier: "DUU",
 	},
 	absol: {
@@ -1615,7 +1615,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "LC",
 	},
 	gastrodon: {
-		tier: "UU",
+		tier: "RU",
 		doublesTier: "DOU",
 	},
 	drifloon: {
@@ -1742,7 +1742,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		doublesTier: "DUU",
 	},
 	uxie: {
-		tier: "RU",
+		tier: "UU",
 		doublesTier: "DUU",
 	},
 	mesprit: {
@@ -1778,7 +1778,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		doublesTier: "DUber",
 	},
 	cresselia: {
-		tier: "UU",
+		tier: "RUBL",
 		doublesTier: "DOU",
 	},
 	phione: {

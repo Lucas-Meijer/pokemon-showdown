@@ -538,11 +538,7 @@ export const commands: Chat.ChatCommands = {
 						} else if (([2, 3, 4, 5, 6, 7].includes(dex.gen)) && set.preferredTypes) {
 							buf += `<b>Preferred Type${Chat.plural(set.preferredTypes)}</b>: ${set.preferredTypes.join(', ')}<br/>`;
 						}
-						buf += `<b>Moves</b>: ${set.movepool.sort().map(formatMove).join(', ')}<br/>`;
-						if (set.abilities) {
-							buf += `<b>Abilit${Chat.plural(set.abilities, 'ies', 'y')}</b>: ${set.abilities.sort().join(', ')}`;
-						}
-						buf += '</details>';
+						buf += `<b>Moves</b>: ${set.movepool.sort().map(formatMove).join(', ')}</details>`;
 						setCount++;
 					}
 					movesets.push(buf);
@@ -846,7 +842,7 @@ export const commands: Chat.ChatCommands = {
 			`</ul>` +
 			`The given probability is for a set that matches EVERY provided condition. ` +
 			`Conditions can be negated by prefixing the <code>[matching value]</code> with <code>!</code>.<br />` +
-			`Requires: % @ # ~ (globally or in the Random Battles room)`
+			`Requires: % @ # & (globally or in the Random Battles room)`
 		);
 	},
 
@@ -872,5 +868,5 @@ export const commands: Chat.ChatCommands = {
 			.join('');
 		return this.sendReplyBox(`<strong>Team for ${format.name}</strong>:` + teamHTML);
 	},
-	generateteamhelp: [`/genteam [format] - Generates a team for the given format. Requires: % @ ~ or Random Battles room auth`],
+	generateteamhelp: [`/genteam [format] - Generates a team for the given format. Requires: % @ & or Random Battles room auth`],
 };

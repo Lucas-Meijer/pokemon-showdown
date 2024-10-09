@@ -21,7 +21,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "LC",
 	},
 	wartortle: {
-		tier: "ZU",
+		tier: "NFE",
 	},
 	blastoise: {
 		tier: "NU",
@@ -429,7 +429,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "OU",
 	},
 	articuno: {
-		tier: "UUBL",
+		tier: "UU",
 	},
 	zapdos: {
 		tier: "OU",

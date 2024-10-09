@@ -167,13 +167,13 @@ describe("New set format (slow)", () => {
 		it(`${filename}.json should have valid set data`, () => {
 			const validRoles = formatInfo[format].roles;
 			for (const [id, sets] of Object.entries(setsJSON)) {
-				const species = dex.species.get(id);
+				const species = Dex.species.get(id);
 				assert(species.exists, `In ${format}, misspelled species ID: ${id}`);
 				assert(Array.isArray(sets.sets));
 				for (const set of sets.sets) {
 					assert(validRoles.includes(set.role), `In ${format}, set for ${species.name} has invalid role: ${set.role}`);
 					for (const move of set.movepool) {
-						const dexMove = dex.moves.get(move);
+						const dexMove = Dex.moves.get(move);
 						assert(dexMove.exists, `In ${format}, ${species.name} has invalid move: ${move}`);
 						// Old gens have moves in id form, currently.
 						if (genNum === 9) {
@@ -186,24 +186,9 @@ describe("New set format (slow)", () => {
 					for (let i = 0; i < set.movepool.length - 1; i++) {
 						assert(set.movepool[i + 1] > set.movepool[i], `In ${format}, ${species.name} movepool should be sorted alphabetically`);
 					}
-					if (genNum >= 3) {
-						assert(set.abilities, `In ${format}, ${set.abilities} has no abilities`);
-						for (const ability of set.abilities) {
-							const dexAbility = dex.abilities.get(ability);
-							assert(dexAbility.exists, `In ${format}, ${species.name} has invalid ability: ${ability}`);
-							// Mega/Primal Pokemon have abilities from their base formes
-							const allowedAbilities = new Set(Object.values((species.battleOnly && !species.requiredAbility) ? dex.species.get(species.battleOnly).abilities : species.abilities));
-							if (species.unreleasedHidden) allowedAbilities.delete(species.abilities.H);
-							assert(allowedAbilities.has(ability), `In ${format}, ${species.name} can't have ${ability}`);
-						}
-						for (let i = 0; i < set.abilities.length - 1; i++) {
-							assert(set.abilities[i + 1] > set.abilities[i], `In ${format}, ${species.name} abilities should be sorted alphabetically`);
-						}
-					}
-					if (genNum === 9) {
-						assert(set.teraTypes, `In ${format}, ${species.name} has no Tera Types`);
+					if (set.teraTypes) {
 						for (const type of set.teraTypes) {
-							const dexType = dex.types.get(type);
+							const dexType = Dex.types.get(type);
 							assert(dexType.exists, `In ${format}, ${species.name} has invalid Tera Type: ${type}`);
 							assert.equal(type, dexType.name, `In ${format}, ${species.name} has misformatted Tera Type: ${type}`);
 						}
@@ -213,7 +198,7 @@ describe("New set format (slow)", () => {
 					}
 					if (set.preferredTypes) {
 						for (const type of set.preferredTypes) {
-							const dexType = dex.types.get(type);
+							const dexType = Dex.types.get(type);
 							assert(dexType.exists, `In ${format}, ${species.name} has invalid Preferred Type: ${type}`);
 							assert.equal(type, dexType.name, `In ${format}, ${species.name} has misformatted Preferred Type: ${type}`);
 						}
@@ -236,11 +221,12 @@ describe("New set format (slow)", () => {
 				assert(species.exists, `In ${format}, Pokemon ${species} does not exist`);
 				const sets = setsJSON[pokemon]["sets"];
 				const types = species.types;
+				const abilities = new Set(Object.values(species.abilities));
+				if (species.unreleasedHidden) abilities.delete(species.abilities.H);
 				for (const set of sets) {
 					assert(set.movepool.every(m => dex.moves.get(m).exists), `In ${format}, for Pokemon ${species}, one of ${set.movepool} does not exist.`);
 					const role = set.role;
 					const moves = new Set(set.movepool.map(m => (m.startsWith('hiddenpower') ? m : dex.moves.get(m).id)));
-					const abilities = set.abilities || [];
 					const specialTypes = genNum === 9 ? set.teraTypes : set.preferredTypes;
 					// Go through all possible teamDetails combinations, if necessary
 					for (let j = 0; j < rounds; j++) {
@@ -252,8 +238,7 @@ describe("New set format (slow)", () => {
 							const stealthRock = Math.floor(i / 2) % 2;
 							const stickyWeb = Math.floor(i / 4) % 2;
 							const spikes = Math.floor(i / 8) % 2;
-							const screens = Math.floor(i / 2) % 2;
-							const teamDetails = {rapidSpin, stealthRock, stickyWeb, spikes, screens};
+							const teamDetails = {rapidSpin, stealthRock, stickyWeb, spikes};
 							// randomMoveset() deletes moves from the movepool, so recreate it every time
 							const movePool = set.movepool.map(m => (m.startsWith('hiddenpower') ? m : dex.moves.get(m).id));
 							let moveSet;

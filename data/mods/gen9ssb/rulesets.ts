@@ -9,8 +9,9 @@ export const Rulesets: import('../../../sim/dex-formats').ModdedFormatDataTable 
 				for (const pokemon of target.side.pokemon) {
 					if (pokemon.hp && pokemon.status === 'slp') {
 						if (!pokemon.statusState.source || !pokemon.statusState.source.isAlly(pokemon)) {
-							if (source.hasAbility('ididitagain')) {
+							if (source.hasAbility('ididitagain') && !source.m.bypassedSleepClause) {
 								this.add('-ability', source, 'I Did It Again');
+								source.m.bypassedSleepClause = true;
 								return;
 							}
 							this.add('-message', 'Sleep Clause Mod activated.');

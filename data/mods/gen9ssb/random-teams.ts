@@ -62,7 +62,7 @@ export const ssbSets: SSBSets = {
 	},
 	Alex: {
 		species: 'Sprigatito', ability: 'Pawprints', item: 'Eviolite', gender: '',
-		moves: [['Charm', 'Tickle'], 'Protect', 'Soak'],
+		moves: ['Substitute', 'Protect', 'Magic Powder'],
 		signatureMove: 'Spicier Extract',
 		evs: {hp: 252, def: 4, spd: 252}, nature: 'Careful', teraType: 'Water',
 	},
@@ -71,12 +71,6 @@ export const ssbSets: SSBSets = {
 		moves: ['No Retreat', 'Bitter Blade', 'Dual Wingbeat'],
 		signatureMove: 'Scumhunt',
 		evs: {atk: 252, spa: 4, spe: 252}, nature: 'Naughty', teraType: 'Fire', shiny: true,
-	},
-	Apple: {
-		species: 'Applin', ability: 'Orchard\'s Gift', item: 'Lum Berry', gender: ['M', 'F'],
-		moves: ['Apple Acid', 'Leech Seed', 'Dragon Pulse'],
-		signatureMove: 'Wopple or Flopple',
-		evs: {hp: 252, spa: 4, spd: 252}, nature: 'Sassy', shiny: 2, teraType: 'Dragon',
 	},
 	'Appletun a la Mode': {
 		species: 'Appletun', ability: 'Served Cold', item: 'Sitrus Berry', gender: 'F',
@@ -182,7 +176,7 @@ export const ssbSets: SSBSets = {
 	},
 	Beowulf: {
 		species: 'Beedrill', ability: 'Intrepid Sword', item: 'Beedrillite', gender: 'M',
-		moves: ['Poison Jab', 'X-Scissor', ['Earthquake', 'Volt Tackle', 'Glacial Lance']],
+		moves: ['Poison Jab', 'Attack Order', ['Sacred Fire', 'Earthquake', 'Volt Tackle', 'Glacial Lance']],
 		signatureMove: 'Buzzer Stinger Counter',
 		evs: {hp: 4, atk: 252, spe: 252}, nature: 'Jolly', shiny: 2,
 	},
@@ -387,7 +381,7 @@ export const ssbSets: SSBSets = {
 	},
 	Felucia: {
 		species: 'Vespiquen', ability: 'Mountaineer', item: 'Red Card', gender: 'F',
-		moves: ['Strength Sap', ['Oblivion Wing', 'Night Shade'], ['Thief', 'Calm Mind', 'Toxic']],
+		moves: ['Strength Sap', ['Bug Buzz', 'Night Shade'], ['Thief', 'Calm Mind', 'Toxic']],
 		signatureMove: 'Rigged Dice',
 		evs: {hp: 252, def: 4, spd: 252}, nature: 'Calm',
 	},
@@ -414,6 +408,12 @@ export const ssbSets: SSBSets = {
 		moves: ['Wrap', 'Cosmic Power', 'Strength Sap'],
 		signatureMove: 'Wiggling Strike',
 		evs: {hp: 252, def: 4, spe: 252}, nature: 'Timid', teraType: 'Grass', shiny: 2,
+	},
+	'Goro Yagami': {
+		species: 'Cyndaquil', ability: 'Illusion Master', item: '', gender: 'M',
+		moves: ['Victory Dance', 'Bitter Blade', 'Thief'],
+		signatureMove: 'Shadow Ambush',
+		evs: {atk: 252, def: 4, spe: 252}, nature: 'Timid', teraType: 'Water',
 	},
 	'Haste Inky': {
 		species: 'Falinks', ability: 'Simple', item: 'Sitrus Berry', gender: 'N',
@@ -456,24 +456,6 @@ export const ssbSets: SSBSets = {
 		moves: ['Hydro Pump', 'Thunder', 'Ice Beam'],
 		signatureMove: 'Hydrostatics',
 		evs: {def: 4, spa: 252, spe: 252}, nature: 'Modest', teraType: 'Water', shiny: 2,
-	},
-	Imperial: {
-		species: 'Kyurem', ability: 'Frozen Fortuity', item: 'Never-Melt Ice', gender: 'N',
-		moves: ['Chilly Reception', 'Fusion Bolt', 'Fusion Flare'],
-		signatureMove: 'Storm Shroud',
-		evs: {atk: 128, spa: 128, spe: 252}, nature: 'Docile', teraType: 'Ice', shiny: 193,
-	},
-	'Imperial-Black': {
-		species: 'Kyurem-Black', ability: 'Frozen Fortuity', item: 'Never-Melt Ice', gender: 'N',
-		moves: ['Mountain Gale', 'Fusion Bolt', 'Ice Shard'],
-		signatureMove: 'Storm Shroud',
-		evs: {atk: 252, def: 4, spe: 252}, nature: 'Adamant', teraType: 'Electric', shiny: 193, skip: 'Imperial',
-	},
-	'Imperial-White': {
-		species: 'Kyurem-White', ability: 'Frozen Fortuity', item: 'Never-Melt Ice', gender: 'N',
-		moves: ['Ice Beam', 'Freeze-Dry', 'Fusion Flare'],
-		signatureMove: 'Storm Shroud',
-		evs: {spa: 252, spd: 4, spe: 252}, nature: 'Modest', teraType: 'Fire', shiny: 193, skip: 'Imperial',
 	},
 	'in the hills': {
 		species: 'Gligar', ability: 'Illiterit', item: 'Eviolite', gender: 'M',
@@ -592,8 +574,14 @@ export const ssbSets: SSBSets = {
 	Lily: {
 		species: 'Togedemaru', ability: 'Unaware', item: 'Leftovers', gender: 'F',
 		moves: ['Victory Dance', 'Plasma Fists', 'Meteor Mash'],
-		signatureMove: 'Power Up',
+		signatureMove: 'Recharge',
 		evs: {hp: 252, def: 4, spd: 252}, nature: 'Careful', teraType: 'Fairy', shiny: 1734,
+	},
+	Lionyx: {
+		species: 'Miltank', ability: 'EnorMOOs', item: 'Leftovers', gender: 'M',
+		moves: [['Glacial Lance', 'Bolt Strike'], 'Milk Drink', 'Defense Curl'],
+		signatureMove: 'Super Rollout',
+		evs: {hp: 252, def: 252, spd: 4}, ivs: {atk: 0, spa: 0}, nature: 'Impish', teraType: ['Electric', 'Ice'], shiny: true,
 	},
 	Loethalion: {
 		species: 'Ralts', ability: 'Psychic Surge', item: 'Gardevoirite', gender: '',
@@ -618,6 +606,12 @@ export const ssbSets: SSBSets = {
 		moves: ['Victory Dance', 'V-create', 'Glacial Lance'],
 		signatureMove: 'Wrath of Frozen Flames',
 		evs: {atk: 252, def: 4, spe: 252}, nature: 'Jolly', teraType: 'Dragon',
+	},
+	'Mad Monty': {
+		species: 'Castform', ability: 'Climate Change', item: 'Heavy-Duty Boots', gender: 'M',
+		moves: ['Weather Ball', 'Defog', ['Solar Beam', 'Thunder', 'Aurora Veil']],
+		signatureMove: 'Storm Shelter',
+		evs: {hp: 4, spa: 252, spe: 252}, nature: 'Modest', teraType: 'Rock',
 	},
 	'marillvibes ♫': {
 		species: 'Marill', ability: 'Huge Power', item: 'Life Orb', gender: 'M',
@@ -693,7 +687,7 @@ export const ssbSets: SSBSets = {
 	},
 	'nya~ ❤': {
 		species: 'Delcatty', ability: 'Adorable Grace', item: 'Focus Band', gender: 'F',
-		moves: ['Freeze-Dry', 'Flamethrower', 'Volt Switch'],
+		moves: ['Freeze-Dry', 'Tri Attack', 'Volt Switch'],
 		signatureMove: ':3',
 		evs: {hp: 252, spa: 4, spe: 252}, nature: 'Naive', teraType: 'Ice',
 	},
@@ -703,11 +697,11 @@ export const ssbSets: SSBSets = {
 		signatureMove: 'Cotton Candy Crush',
 		evs: {hp: 248, spd: 164, spe: 96}, nature: 'Careful', shiny: 4,
 	},
-	pants: {
-		species: 'Annihilape', ability: 'Drifting', item: 'Leftovers', gender: 'M',
-		moves: ['Rage Fist', 'Drain Punch', 'Dragon Dance'],
-		signatureMove: 'Eerie Apathy',
-		evs: {hp: 240, spd: 252, spe: 16}, nature: 'Careful', teraType: 'Ghost',
+	Opple: {
+		species: 'Applin', ability: 'Orchard\'s Gift', item: 'Lum Berry', gender: ['M', 'F'],
+		moves: ['Apple Acid', 'Leech Seed', 'Dragon Pulse'],
+		signatureMove: 'Wopple or Flopple',
+		evs: {hp: 252, spa: 4, spd: 252}, nature: 'Sassy', shiny: 2, teraType: 'Dragon',
 	},
 	PartMan: {
 		species: 'Chandelure', ability: 'C- Tier Shitposter', item: 'Leek', gender: 'M',
@@ -727,8 +721,14 @@ export const ssbSets: SSBSets = {
 		signatureMove: 'Gear Grind',
 		evs: {hp: 252, def: 4, spe: 252}, nature: 'Jolly',
 	},
+	PenQuin: {
+		species: 'Empoleon', ability: '\'Poleon\'s Pyro Quirk', item: 'Assault Vest', gender: 'M',
+		moves: ['Liquidation', 'Sacred Fire', 'Knock Off'],
+		signatureMove: 'Splash n\' Lucky Blaze',
+		evs: {atk: 252, def: 252, spe: 4}, nature: 'Adamant', teraType: 'Fire',
+	},
 	phoopes: {
-		species: 'Jynx', ability: 'I Did It Again', item: 'Focus Sash', gender: 'F',
+		species: 'Jynx', ability: 'I Did It Again', item: 'Red Card', gender: 'F',
 		moves: ['Lovely Kiss', 'Psychic', 'Amnesia'],
 		signatureMove: 'Gen 1 Blizzard',
 		evs: {hp: 4, spa: 252, spe: 252}, nature: 'Timid', teraType: 'Ice',
@@ -805,12 +805,6 @@ export const ssbSets: SSBSets = {
 		moves: ['Hyper Voice', 'Psyshock', 'Focus Blast'],
 		signatureMove: 'Monke Magic',
 		evs: {hp: 252, def: 4, spa: 252}, ivs: {spe: 0}, nature: 'Quiet', teraType: 'Fighting',
-	},
-	Rissoux: {
-		species: 'Arcanine-Hisui', ability: 'Hard Headed', item: 'Heavy-Duty Boots', gender: 'M',
-		moves: ['Head Smash', 'Flare Blitz', 'Morning Sun'],
-		signatureMove: 'Call of the Wild',
-		evs: {hp: 4, atk: 252, spe: 252}, nature: 'Jolly', teraType: 'Grass',
 	},
 	RSB: {
 		species: 'Growlithe', ability: 'Hot Pursuit', item: 'Eviolite', gender: 'M',
@@ -904,7 +898,7 @@ export const ssbSets: SSBSets = {
 	},
 	Struchni: {
 		species: 'Aggron', ability: 'Overasked Clause', item: 'Leftovers', gender: 'M',
-		moves: ['Detect', 'Encore', 'U-turn'],
+		moves: ['Protect', 'Encore', 'U-turn'],
 		signatureMove: '~randfact',
 		evs: {hp: 252, def: 16, spd: 240}, nature: 'Careful', teraType: 'Steel',
 	},
@@ -1107,14 +1101,6 @@ export const ssbSets: SSBSets = {
 	},
 };
 
-const afdSSBSets: SSBSets = {
-	'Fox': {
-		species: 'Fennekin', ability: 'No Ability', item: '', gender: '',
-		moves: [],
-		signatureMove: 'Super Metronome',
-	},
-};
-
 export class RandomStaffBrosTeams extends RandomTeams {
 	randomStaffBrosTeam(options: {inBattle?: boolean} = {}) {
 		this.enforceNoDirectCustomBanlistChanges();
@@ -1122,11 +1108,10 @@ export class RandomStaffBrosTeams extends RandomTeams {
 		const team: PokemonSet[] = [];
 		const debug: string[] = []; // Set this to a list of SSB sets to override the normal pool for debugging.
 		const ruleTable = this.dex.formats.getRuleTable(this.format);
-		const meme = ruleTable.has('dynamaxclause') && !debug.length;
 		const monotype = this.forceMonotype || (ruleTable.has('sametypeclause') ?
 			this.sample([...this.dex.types.names().filter(x => x !== 'Stellar')]) : false);
 
-		let pool = meme ? Object.keys(afdSSBSets) : Object.keys(ssbSets);
+		let pool = Object.keys(ssbSets);
 		if (debug.length) {
 			while (debug.length < 6) {
 				const staff = this.sampleNoReplace(pool);
@@ -1146,12 +1131,12 @@ export class RandomStaffBrosTeams extends RandomTeams {
 		while (pool.length && team.length < this.maxTeamSize) {
 			if (depth >= 200) throw new Error(`Infinite loop in Super Staff Bros team generation.`);
 			depth++;
-			const name = meme ? this.sample(pool) : this.sampleNoReplace(pool);
-			const ssbSet: SSBSet = meme ? this.dex.deepClone(afdSSBSets[name]) : this.dex.deepClone(ssbSets[name]);
+			const name = this.sampleNoReplace(pool);
+			const ssbSet: SSBSet = this.dex.deepClone(ssbSets[name]);
 			if (ssbSet.skip) continue;
 
 			// Enforce typing limits
-			if (!(debug.length || monotype || meme)) { // Type limits are ignored for debugging, monotype, or memes.
+			if (!(debug.length || monotype)) { // Type limits are ignored for debugging, monotype, or memes.
 				const species = this.dex.species.get(ssbSet.species);
 
 				const weaknesses = [];
@@ -1223,12 +1208,11 @@ export class RandomStaffBrosTeams extends RandomTeams {
 					set.moves[cmIndex] = this.sample(["Thief", "Toxic"]);
 				}
 			}
-			if (set.name === "Frostyicelad" && set.shiny) {
-				const moveIndex = Math.max(set.moves.indexOf('Dire Claw'),
-					set.moves.indexOf('Meteor Mash'), set.moves.indexOf('Bitter Malice'));
-				if (moveIndex >= 0) {
-					set.moves[moveIndex] = 'Fishious Rend';
-					teraType = 'Water';
+			if (set.name === "Lionyx") {
+				if (set.moves.includes("Bolt Strike")) {
+					teraType = 'Electric';
+				} else {
+					teraType = 'Ice';
 				}
 			}
 
@@ -1238,7 +1222,7 @@ export class RandomStaffBrosTeams extends RandomTeams {
 
 			// Team specific tweaks occur here
 			// Swap last and second to last sets if last set has Illusion
-			if (team.length === this.maxTeamSize && (set.ability === 'Illusion')) {
+			if (team.length === this.maxTeamSize && (set.ability === 'Illusion' || set.ability === 'Illusion Master')) {
 				team[this.maxTeamSize - 1] = team[this.maxTeamSize - 2];
 				team[this.maxTeamSize - 2] = set;
 			}

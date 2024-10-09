@@ -1498,9 +1498,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: {
-			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1,
-			failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
+			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
+		noSketch: true,
 		secondary: {
 			chance: 30,
 			status: 'brn',
@@ -2441,6 +2441,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			protect: 1, mirror: 1, sound: 1, distance: 1, bypasssub: 1,
 			nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
+		noSketch: true,
 		secondary: {
 			chance: 100,
 			volatileStatus: 'confusion',
@@ -2728,9 +2729,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: {
-			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1,
-			failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
+			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
+		noSketch: true,
 		secondary: {
 			chance: 30,
 			status: 'par',
@@ -3465,7 +3466,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		name: "Dark Void",
 		pp: 10,
 		priority: 0,
-		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1, nosketch: 1},
+		flags: {protect: 1, reflectable: 1, mirror: 1, metronome: 1},
 		status: 'slp',
 		onTry(source, target, move) {
 			if (source.species.name === 'Darkrai' || move.hasBounced) {
@@ -3475,6 +3476,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			this.hint("Only a Pokemon whose form is Darkrai can use this move.");
 			return null;
 		},
+		noSketch: true,
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Dark",
@@ -9476,7 +9478,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		name: "Hyperspace Fury",
 		pp: 5,
 		priority: 0,
-		flags: {mirror: 1, bypasssub: 1, nosketch: 1},
+		flags: {mirror: 1, bypasssub: 1},
 		breaksProtect: true,
 		onTry(source) {
 			if (source.species.name === 'Hoopa-Unbound') {
@@ -9497,6 +9499,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				def: -1,
 			},
 		},
+		noSketch: true,
 		secondary: null,
 		target: "normal",
 		type: "Dark",
@@ -11048,9 +11051,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: {
-			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1,
-			failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
+			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
+		noSketch: true,
 		secondary: {
 			chance: 30,
 			volatileStatus: 'confusion',
@@ -11085,7 +11088,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				const newMove = this.dex.getActiveMove(move.id);
 				newMove.hasBounced = true;
 				newMove.pranksterBoosted = this.effectState.pranksterBoosted;
-				this.actions.useMove(newMove, target, {target: source});
+				this.actions.useMove(newMove, target, source);
 				return null;
 			},
 			onAllyTryHitSide(target, source, move) {
@@ -11095,7 +11098,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				const newMove = this.dex.getActiveMove(move.id);
 				newMove.hasBounced = true;
 				newMove.pranksterBoosted = false;
-				this.actions.useMove(newMove, this.effectState.target, {target: source});
+				this.actions.useMove(newMove, this.effectState.target, source);
 				return null;
 			},
 		},
@@ -11934,7 +11937,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			if (move.category === 'Status' || move.flags['failmefirst']) return false;
 
 			pokemon.addVolatile('mefirst');
-			this.actions.useMove(move, pokemon, {target});
+			this.actions.useMove(move, pokemon, target);
 			return null;
 		},
 		condition: {
@@ -12459,7 +12462,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			if (!move?.flags['mirror'] || move.isZ || move.isMax) {
 				return false;
 			}
-			this.actions.useMove(move.id, pokemon, {target});
+			this.actions.useMove(move.id, pokemon, target);
 			return null;
 		},
 		callsMove: true,
@@ -13046,7 +13049,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			} else if (this.field.isTerrain('psychicterrain')) {
 				move = 'psychic';
 			}
-			this.actions.useMove(move, pokemon, {target});
+			this.actions.useMove(move, pokemon, target);
 			return null;
 		},
 		callsMove: true,
@@ -13250,9 +13253,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: {
-			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1,
-			failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
+			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
+		noSketch: true,
 		secondary: {
 			chance: 30,
 			status: 'psn',
@@ -13588,6 +13591,26 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 		contestType: "Clever",
+	},
+	paleowave: {
+		num: 0,
+		accuracy: 100,
+		basePower: 85,
+		category: "Special",
+		isNonstandard: "CAP",
+		name: "Paleo Wave",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 20,
+			boosts: {
+				atk: -1,
+			},
+		},
+		target: "normal",
+		type: "Rock",
+		contestType: "Beautiful",
 	},
 	paraboliccharge: {
 		num: 570,
@@ -14542,16 +14565,13 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			for (i in target.boosts) {
 				source.boosts[i] = target.boosts[i];
 			}
-
-			const volatilesToCopy = ['dragoncheer', 'focusenergy', 'gmaxchistrike', 'laserfocus'];
-			// we need to remove all crit stage volatiles first; otherwise copying e.g. dragoncheer onto a mon with focusenergy
-			// will crash the server (since addVolatile fails due to overlap, leaving the source mon with no hasDragonType to set)
-			for (const volatile of volatilesToCopy) source.removeVolatile(volatile);
+			const volatilesToCopy = ['focusenergy', 'gmaxchistrike', 'laserfocus'];
 			for (const volatile of volatilesToCopy) {
 				if (target.volatiles[volatile]) {
 					source.addVolatile(volatile);
 					if (volatile === 'gmaxchistrike') source.volatiles[volatile].layers = target.volatiles[volatile].layers;
-					if (volatile === 'dragoncheer') source.volatiles[volatile].hasDragonType = target.volatiles[volatile].hasDragonType;
+				} else {
+					source.removeVolatile(volatile);
 				}
 			}
 			this.add('-copyboost', source, target, '[from] move: Psych Up');
@@ -15500,13 +15520,8 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				this.add('-fail', source, 'heal');
 				return null;
 			}
-			// insomnia and vital spirit checks are separate so that the message is accurate in multi-ability mods
-			if (source.hasAbility('insomnia')) {
-				this.add('-fail', source, '[from] ability: Insomnia', '[of] ' + source);
-				return null;
-			}
-			if (source.hasAbility('vitalspirit')) {
-				this.add('-fail', source, '[from] ability: Vital Spirit', '[of] ' + source);
+			if (source.hasAbility(['insomnia', 'vitalspirit'])) {
+				this.add('-fail', source, '[from] ability: ' + source.getAbility().name, '[of] ' + source);
 				return null;
 			}
 		},
@@ -15573,10 +15588,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, dance: 1, metronome: 1},
 		onModifyType(move, pokemon) {
-			const types = pokemon.getTypes();
-			let type = types[0];
-			if (type === 'Bird') type = '???';
-			if (type === '???' && types[1]) type = types[1];
+			let type = pokemon.getTypes()[0];
+			if (type === "Bird") type = "???";
+			if (type === "Stellar") type = pokemon.getTypes(false, true)[0];
 			move.type = type;
 		},
 		secondary: null,
@@ -15652,7 +15666,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 1,
 		noPPBoosts: true,
 		priority: 0,
-		flags: {heal: 1, nosketch: 1},
+		flags: {heal: 1},
 		onTryHit(source) {
 			if (!source.side.pokemon.filter(ally => ally.fainted).length) {
 				return false;
@@ -15667,6 +15681,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			duration: 1,
 			// reviving implemented in side.ts, kind of
 		},
+		noSketch: true,
 		secondary: null,
 		target: "self",
 		type: "Normal",
@@ -16702,6 +16717,26 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		type: "Ghost",
 		contestType: "Clever",
 	},
+	shadowstrike: {
+		num: 0,
+		accuracy: 95,
+		basePower: 80,
+		category: "Physical",
+		isNonstandard: "CAP",
+		name: "Shadow Strike",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		secondary: {
+			chance: 50,
+			boosts: {
+				def: -1,
+			},
+		},
+		target: "normal",
+		type: "Ghost",
+		contestType: "Clever",
+	},
 	sharpen: {
 		num: 159,
 		accuracy: true,
@@ -17157,13 +17192,12 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		noPPBoosts: true,
 		priority: 0,
 		flags: {
-			bypasssub: 1, allyanim: 1, failencore: 1, nosleeptalk: 1, noassist: 1,
-			failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
+			bypasssub: 1, allyanim: 1, failencore: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
 		onHit(target, source) {
 			const move = target.lastMove;
 			if (source.transformed || !move || source.moves.includes(move.id)) return false;
-			if (move.flags['nosketch'] || move.isZ || move.isMax) return false;
+			if (move.noSketch || move.isZ || move.isMax) return false;
 			const sketchIndex = source.moves.indexOf('sketch');
 			if (sketchIndex < 0) return false;
 			const sketchedMove = {
@@ -17179,6 +17213,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 			source.baseMoveSlots[sketchIndex] = sketchedMove;
 			this.add('-activate', source, 'move: Sketch', move.name);
 		},
+		noSketch: true,
 		secondary: null,
 		target: "normal",
 		type: "Normal",
@@ -18435,7 +18470,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		},
 		condition: {
 			duration: 1,
-			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Spotlight');
 			},
@@ -18896,8 +18930,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: {
 			contact: 1, protect: 1,
-			failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
+			failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
+		noSketch: true,
 		onModifyMove(move, pokemon, target) {
 			move.type = '???';
 			this.add('-activate', pokemon, 'move: Struggle');
@@ -19968,7 +20003,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		name: "Tera Starstorm",
 		pp: 5,
 		priority: 0,
-		flags: {protect: 1, mirror: 1, noassist: 1, failcopycat: 1, failmimic: 1, nosketch: 1},
+		flags: {protect: 1, mirror: 1, noassist: 1, failcopycat: 1, failmimic: 1},
 		onModifyType(move, pokemon) {
 			if (pokemon.species.name === 'Terapagos-Stellar') {
 				move.type = 'Stellar';
@@ -19982,6 +20017,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 				move.target = 'allAdjacentFoes';
 			}
 		},
+		noSketch: true,
 		secondary: null,
 		target: "normal",
 		type: "Normal",
@@ -21581,9 +21617,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: {
-			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1,
-			failcopycat: 1, failmimic: 1, failinstruct: 1, nosketch: 1,
+			protect: 1, failencore: 1, failmefirst: 1, nosleeptalk: 1, noassist: 1, failcopycat: 1, failmimic: 1, failinstruct: 1,
 		},
+		noSketch: true,
 		secondary: {
 			chance: 10,
 			status: 'slp',
@@ -22035,48 +22071,5 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Electric",
 		contestType: "Cool",
-	},
-
-	// CAP moves
-
-	paleowave: {
-		num: 0,
-		accuracy: 100,
-		basePower: 85,
-		category: "Special",
-		isNonstandard: "CAP",
-		name: "Paleo Wave",
-		pp: 15,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		secondary: {
-			chance: 20,
-			boosts: {
-				atk: -1,
-			},
-		},
-		target: "normal",
-		type: "Rock",
-		contestType: "Beautiful",
-	},
-	shadowstrike: {
-		num: 0,
-		accuracy: 95,
-		basePower: 80,
-		category: "Physical",
-		isNonstandard: "CAP",
-		name: "Shadow Strike",
-		pp: 10,
-		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
-		secondary: {
-			chance: 50,
-			boosts: {
-				def: -1,
-			},
-		},
-		target: "normal",
-		type: "Ghost",
-		contestType: "Clever",
 	},
 };

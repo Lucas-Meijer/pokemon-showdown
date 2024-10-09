@@ -575,22 +575,9 @@ export class DexSpecies {
 	getMovePool(id: ID, isNatDex = false): Set<ID> {
 		let eggMovesOnly = false;
 		let maxGen = this.dex.gen;
-		const gen3HMMoves = ['cut', 'fly', 'surf', 'strength', 'flash', 'rocksmash', 'waterfall', 'dive'];
-		const gen4HMMoves = ['cut', 'fly', 'surf', 'strength', 'rocksmash', 'waterfall', 'rockclimb'];
 		const movePool = new Set<ID>();
 		for (const {species, learnset} of this.getFullLearnset(id)) {
 			for (const moveid in learnset) {
-				if (species.isNonstandard !== 'CAP') {
-					if (gen4HMMoves.includes(moveid) && this.dex.gen >= 5) {
-						if (!learnset[moveid].some(source => parseInt(source.charAt(0)) >= 5 &&
-							parseInt(source.charAt(0)) <= this.dex.gen)) continue;
-					} else if (gen3HMMoves.includes(moveid) && this.dex.gen >= 4 &&
-						!learnset[moveid].some(source => parseInt(source.charAt(0)) >= 4 &&
-						parseInt(source.charAt(0)) <= this.dex.gen)) {
-						continue;
-					}
-				}
-				if (!eggMovesOnly) eggMovesOnly = this.eggMovesOnly(species, this.get(id));
 				if (eggMovesOnly) {
 					if (learnset[moveid].some(source => source.startsWith('9E'))) {
 						movePool.add(moveid as ID);
@@ -615,7 +602,7 @@ export class DexSpecies {
 					// Smeargle time
 					// A few moves like Dark Void were made unSketchable in a generation later than when they were introduced
 					// However, this has only happened in a gen where transfer moves are unavailable
-					const sketchables = this.dex.moves.all().filter(m => !m.flags['nosketch'] && !m.isNonstandard);
+					const sketchables = this.dex.moves.all().filter(m => !m.noSketch && !m.isNonstandard);
 					for (const move of sketchables) {
 						movePool.add(move.id);
 					}
@@ -736,14 +723,5 @@ export class DexSpecies {
 		}
 		this.allCache = Object.freeze(species);
 		return this.allCache;
-	}
-
-	eggMovesOnly(child: Species, father: Species | null) {
-		if (child.baseSpecies === father?.baseSpecies) return false;
-		while (father) {
-			if (father.name === child.name) return false;
-			father = this.learnsetParent(father);
-		}
-		return true;
 	}
 }

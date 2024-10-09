@@ -43,10 +43,6 @@ export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable 
 		inherit: true,
 		unreleasedHidden: true,
 	},
-	ditto: {
-		inherit: true,
-		unreleasedHidden: true,
-	},
 	snorlax: {
 		inherit: true,
 		unreleasedHidden: true,

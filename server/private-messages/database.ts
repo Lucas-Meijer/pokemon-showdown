@@ -6,7 +6,7 @@
 import {SQL, FS} from '../../lib';
 import {MAX_PENDING} from '.';
 
-export const statements = {
+export const statements: {[k: string]: string} = {
 	send: 'INSERT INTO offline_pms (sender, receiver, message, time) VALUES (?, ?, ?, ?)',
 	clear: 'DELETE FROM offline_pms WHERE receiver = ?',
 	fetch: 'SELECT * FROM offline_pms WHERE receiver = ?',
@@ -18,25 +18,23 @@ export const statements = {
 	getSettings: 'SELECT * FROM pm_settings WHERE userid = ?',
 	setBlock: 'REPLACE INTO pm_settings (userid, view_only) VALUES (?, ?)',
 	deleteSettings: 'DELETE FROM pm_settings WHERE userid = ?',
-} as const;
-
-type Statement = keyof typeof statements;
+};
 
 class StatementMap {
 	env: SQL.TransactionEnvironment;
 	constructor(env: SQL.TransactionEnvironment) {
 		this.env = env;
 	}
-	run(name: Statement, args: any[] | AnyObject) {
+	run(name: string, args: any[] | AnyObject) {
 		return this.getStatement(name).run(args);
 	}
-	all(name: Statement, args: any[] | AnyObject) {
+	all(name: string, args: any[] | AnyObject) {
 		return this.getStatement(name).all(args);
 	}
-	get(name: Statement, args: any[] | AnyObject) {
+	get(name: string, args: any[] | AnyObject) {
 		return this.getStatement(name).get(args);
 	}
-	getStatement(name: Statement) {
+	getStatement(name: string) {
 		const source = statements[name];
 		return this.env.statements.get(source)!;
 	}

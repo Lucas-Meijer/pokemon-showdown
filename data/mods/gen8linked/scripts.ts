@@ -115,10 +115,8 @@ export const Scripts: ModdedBattleScriptsData = {
 				}
 				return;
 			}
-			this.actions.runMove(action.move, action.pokemon, action.targetLoc, {
-				sourceEffect: action.sourceEffect, zMove: action.zmove,
-				maxMove: action.maxMove, originalTarget: action.originalTarget,
-			});
+			this.actions.runMove(action.move, action.pokemon, action.targetLoc, action.sourceEffect,
+				action.zmove, undefined, action.maxMove, action.originalTarget);
 			break;
 		case 'megaEvo':
 			this.actions.runMegaEvo(action.pokemon);
@@ -305,22 +303,15 @@ export const Scripts: ModdedBattleScriptsData = {
 		return false;
 	},
 	actions: {
-		runMove(moveOrMoveName, pokemon, targetLoc, options) {
+		runMove(moveOrMoveName, pokemon, targetLoc, sourceEffect, zMove, externalMove, maxMove, originalTarget) {
 			pokemon.activeMoveActions++;
-			const zMove = options?.zMove;
-			const maxMove = options?.maxMove;
-			const externalMove = options?.externalMove;
-			const originalTarget = options?.originalTarget;
-			let sourceEffect = options?.sourceEffect;
 			let target = this.battle.getTarget(pokemon, maxMove || zMove || moveOrMoveName, targetLoc, originalTarget);
 			let baseMove = this.dex.getActiveMove(moveOrMoveName);
-			const priority = baseMove.priority;
 			const pranksterBoosted = baseMove.pranksterBoosted;
 			if (baseMove.id !== 'struggle' && !zMove && !maxMove && !externalMove) {
 				const changedMove = this.battle.runEvent('OverrideAction', pokemon, target, baseMove);
 				if (changedMove && changedMove !== true) {
 					baseMove = this.dex.getActiveMove(changedMove);
-					baseMove.priority = priority;
 					if (pranksterBoosted) baseMove.pranksterBoosted = pranksterBoosted;
 					target = this.battle.getRandomTarget(pokemon, baseMove);
 				}
@@ -397,7 +388,7 @@ export const Scripts: ModdedBattleScriptsData = {
 				this.battle.add('-zpower', pokemon);
 				pokemon.side.zMoveUsed = true;
 			}
-			const moveDidSomething = this.useMove(baseMove, pokemon, {target, sourceEffect, zMove, maxMove});
+			const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove, maxMove);
 			this.battle.lastSuccessfulMoveThisTurn = moveDidSomething ? this.battle.activeMove && this.battle.activeMove.id : null;
 			if (this.battle.activeMove) move = this.battle.activeMove;
 			this.battle.singleEvent('AfterMove', move, null, pokemon, target, move);
@@ -424,8 +415,7 @@ export const Scripts: ModdedBattleScriptsData = {
 					if (dancer.fainted) continue;
 					this.battle.add('-activate', dancer, 'ability: Dancer');
 					const dancersTarget = !target!.isAlly(dancer) && pokemon.isAlly(dancer) ? target! : pokemon;
-					this.runMove(move.id, dancer, dancer.getLocOf(dancersTarget),
-						{sourceEffect: this.dex.abilities.get('dancer'), externalMove: true});
+					this.runMove(move.id, dancer, dancer.getLocOf(dancersTarget), this.dex.abilities.get('dancer'), undefined, true);
 				}
 			}
 			if (noLock && pokemon.volatiles['lockedmove']) delete pokemon.volatiles['lockedmove'];
