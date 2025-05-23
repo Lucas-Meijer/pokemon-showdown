@@ -393,6 +393,20 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			}
 		},
 	},
+	{
+		name: "[Gen 9] Shinymons",
+		desc: `A Pet Mods Room Mod where every Pokemon receives a new Shiny form.`,
+		mod: 'shinymons',
+		ruleset: ['Standard', 'Data Preview'],
+		banlist: [],
+		onBegin() {
+			for (const pokemon of this.getAllPokemon()) {
+				if (pokemon.set.shiny) {
+					pokemon.formeChange(`${pokemon.name}-Shiny`, null, true, '0', '[msg]')
+				}
+			}
+		},
+	},
 
 	// Draft League
 	///////////////////////////////////////////////////////////////////
