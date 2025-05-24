@@ -801,7 +801,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	dragonite: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	dragoniteshiny: {
+		tier: "OU",
 	},
 	mewtwo: {
 		tier: "Illegal",
@@ -2298,7 +2301,7 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	ferrothorn: {
-		tier: "Illegal",
+		tier: "OU",
 	},
 	klink: {
 		tier: "Illegal",

@@ -398,13 +398,13 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		desc: `A Pet Mods Room Mod where every Pokemon receives a new Shiny form.`,
 		mod: 'shinymons',
 		ruleset: ['Standard', 'Data Preview'],
-		banlist: [],
-		onBegin() {
-			for (const pokemon of this.getAllPokemon()) {
-				if (pokemon.set.shiny) {
-					pokemon.formeChange(`${pokemon.name}-Shiny`, null, true, '0', '[msg]')
-				}
-			}
+		banlist: ['Uber'],
+		validateSet(set, teamHas) {
+			let speciesName = set.species;
+			if (set.shiny) speciesName += "-Shiny";
+			set.species = speciesName;
+			this.dex.data.Pokedex[this.toID(speciesName)].name = speciesName;
+			return this.validateSet(set, teamHas);
 		},
 	},
 

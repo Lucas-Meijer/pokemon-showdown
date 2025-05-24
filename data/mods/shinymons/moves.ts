@@ -1,44 +1,23 @@
 export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
-	leechlife: {
-		inherit: true,
-		onModifyMove(move, pokemon) {
-			if (!pokemon.volatiles['bloodsucking']) return;
-			move.basePower = 20;
-			move.drain = [1, 1];
-			if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
-			pokemon.removeVolatile('bloodsucking');
-		},
-	},
-
-	// fake moves
-	fishingtokens: {
-		accuracy: true,
-		basePower: 0,
-		category: "Status",
-		name: "Fishing Tokens",
-		pp: 30,
+	corrosivejab: {
+		num: -1001,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		name: "Corrosive Jab",
+		pp: 20,
 		priority: 0,
-		flags: { snatch: 1 },
-		sideCondition: 'fishingtokens',
-		condition: {
-			onSideStart(side) {
-				this.add('-sidestart', side, 'Fishing Tokens');
-				this.effectState.layers = 1;
-			},
-			onSideRestart(side) {
-				this.add('-sidestart', side, 'Fishing Tokens');
-				this.effectState.layers++;
-			},
-			onSideResidualOrder: 26,
-			onSideResidualSubOrder: 2,
-			onSideEnd(side) {
-				this.add('-sideend', side, 'move: Fishing Tokens');
-			},
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
+		ignoreImmunity: { 'Poison': true },
+		onEffectiveness(typeMod, target, type, move) {
+			if (type === 'Steel') return -1;
 		},
-		secondary: null,
-		target: "allySide",
-		type: "Water",
-		zMove: { boost: { spd: 1 } },
-		contestType: "Beautiful", // they sure are
+		secondary: {
+			chance: 30,
+			status: 'psn',
+		},
+		target: "normal",
+		type: "Poison",
+		contestType: "Tough",
 	},
 };
