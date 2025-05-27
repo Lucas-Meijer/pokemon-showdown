@@ -225,13 +225,22 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	igglybuff: {
-		tier: "Illegal",
+		tier: "LC",
+	},
+	igglybuffshiny: {
+		tier: "LC",
 	},
 	jigglypuff: {
-		tier: "Illegal",
+		tier: "NFE",
+	},
+	jigglypuffshiny: {
+		tier: "NFE",
 	},
 	wigglytuff: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	wigglytuffshiny: {
+		tier: "OU",
 	},
 	zubat: {
 		tier: "Illegal",
@@ -405,13 +414,19 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	slowpoke: {
-		tier: "Illegal",
+		tier: "LC",
+	},
+	slowpokeshiny: {
+		tier: "LC",
 	},
 	slowpokegalar: {
 		tier: "Illegal",
 	},
 	slowbro: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	slowbroshiny: {
+		tier: "OU",
 	},
 	slowbromega: {
 		tier: "Illegal",
@@ -570,7 +585,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	weezinggalar: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	weezinggalarshiny: {
+		tier: "OU",
 	},
 	rhyhorn: {
 		tier: "Illegal",
@@ -798,7 +816,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	dragonair: {
-		tier: "Illegal",
+		tier: "NFE",
+	},
+	dragonairshiny: {
+		tier: "NFE",
 	},
 	dragonite: {
 		tier: "OU",
@@ -1029,13 +1050,19 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	sneaselhisui: {
-		tier: "Illegal",
+		tier: "LC",
+	},
+	sneaselhisuishiny: {
+		tier: "LC",
 	},
 	weavile: {
 		tier: "Illegal",
 	},
 	sneasler: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	sneaslershiny: {
+		tier: "OU",
 	},
 	teddiursa: {
 		tier: "Illegal",
@@ -1239,10 +1266,16 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	taillow: {
-		tier: "Illegal",
+		tier: "LC",
+	},
+	taillowshiny: {
+		tier: "LC",
 	},
 	swellow: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	swellowshiny: {
+		tier: "OU",
 	},
 	wingull: {
 		tier: "Illegal",
@@ -1491,10 +1524,16 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	anorith: {
-		tier: "Illegal",
+		tier: "LC",
+	},
+	anorithshiny: {
+		tier: "LC",
 	},
 	armaldo: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	armaldoshiny: {
+		tier: "OU",
 	},
 	feebas: {
 		tier: "Illegal",
@@ -1527,13 +1566,22 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	duskull: {
-		tier: "Illegal",
+		tier: "LC",
+	},
+	duskullshiny: {
+		tier: "LC",
 	},
 	dusclops: {
-		tier: "Illegal",
+		tier: "NFE",
+	},
+	dusclopsshiny: {
+		tier: "NFE",
 	},
 	dusknoir: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	dusknoirshiny: {
+		tier: "OU",
 	},
 	tropius: {
 		tier: "Illegal",
@@ -2655,7 +2703,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	carbink: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	carbinkshiny: {
+		tier: "OU",
 	},
 	goomy: {
 		tier: "Illegal",
@@ -2745,7 +2796,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	hoopa: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	hoopashiny: {
+		tier: "OU",
 	},
 	hoopaunbound: {
 		tier: "Illegal",
@@ -2928,7 +2982,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	passimian: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	passimianshiny: {
+		tier: "OU",
 	},
 	wimpod: {
 		tier: "Illegal",
@@ -3783,7 +3840,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	walkingwake: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	walkingwakeshiny: {
+		tier: "OU",
 	},
 	ironleaves: {
 		tier: "Illegal",

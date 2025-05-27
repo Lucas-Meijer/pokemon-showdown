@@ -29,21 +29,30 @@ export const Scripts: ModdedBattleScriptsData = {
 
 				const shinyMove: { [k: string]: [string, string] } = {
 					'Dragonite': ['poisonjab', 'corrosivejab'],
+					'Sneasler': ['direclaw', 'weldingclaw'],
+					'Wigglytuff': ['swallow', 'poisonoushug'],
+					'Passimian': ['suckerpunch', 'himalayantraveller'],
+					'Hoopa': ['shadowball', 'gild'],
+					'Weezing-Galar': ['strangesteam', 'heatdeath'],
+					'Slowbro': ['icepunch', 'rockslap'],
+					'Dusknoir': ['shadowpunch', 'jawsoflife'],
 				};
-				const shinyMoveIndex = pokemon.baseMoves.indexOf(shinyMove[species][0]);
-				if (shinyMoveIndex >= 0) {
-					const move = this.dex.moves.get(shinyMove[species][1]);
-					pokemon.baseMoveSlots[shinyMoveIndex] = {
-						move: move.name,
-						id: move.id,
-						pp: move.noPPBoosts ? move.pp : move.pp * 8 / 5,
-						maxpp: move.noPPBoosts ? move.pp : move.pp * 8 / 5,
-						target: move.target,
-						disabled: false,
-						disabledSource: '',
-						used: false,
-					};
-					pokemon.moveSlots = pokemon.baseMoveSlots.slice();
+				if(Object.keys(shinyMove).includes(pokemon.name)) {
+					const shinyMoveIndex = pokemon.baseMoves.indexOf(shinyMove[species][0]);
+					if (shinyMoveIndex >= 0) {
+						const move = this.dex.moves.get(shinyMove[species][1]);
+						pokemon.baseMoveSlots[shinyMoveIndex] = {
+							move: move.name,
+							id: move.id,
+							pp: move.noPPBoosts ? move.pp : move.pp * 8 / 5,
+							maxpp: move.noPPBoosts ? move.pp : move.pp * 8 / 5,
+							target: move.target,
+							disabled: false,
+							disabledSource: '',
+							used: false,
+						};
+						pokemon.moveSlots = pokemon.baseMoveSlots.slice();
+					}
 				}
 			}
 
