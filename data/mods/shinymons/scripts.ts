@@ -1,8 +1,5 @@
-import type {Action, SwitchAction} from "../../../sim/battle-queue";
-import {toID} from "../../../sim/dex-data";
-import type {ChosenAction} from "../../../sim/side";
-import {getName} from "../gen9ssb/scripts";
-import {Pokemon} from "../../../sim";
+import type { Action } from "../../../sim/battle-queue";
+import type { Pokemon } from "../../../sim";
 
 export const Scripts: ModdedBattleScriptsData = {
 	gen: 9,
@@ -24,7 +21,7 @@ export const Scripts: ModdedBattleScriptsData = {
 				if (!pokemon.set.shiny) continue;
 				const species = pokemon.species.name;
 				const ability = pokemon.ability;
-				pokemon.formeChange(`${pokemon.name}-Shiny`, this.effect, true, '0', '[msg]')
+				pokemon.formeChange(`${pokemon.name}-Shiny`, this.effect, true, '0', '[msg]');
 				pokemon.ability = ability;
 
 				const shinyMove: { [k: string]: [string, string] } = {
@@ -37,7 +34,7 @@ export const Scripts: ModdedBattleScriptsData = {
 					'Slowbro': ['icepunch', 'rockslap'],
 					'Dusknoir': ['shadowpunch', 'jawsoflife'],
 				};
-				if(Object.keys(shinyMove).includes(pokemon.name)) {
+				if (Object.keys(shinyMove).includes(pokemon.name)) {
 					const shinyMoveIndex = pokemon.baseMoves.indexOf(shinyMove[species][0]);
 					if (shinyMoveIndex >= 0) {
 						const move = this.dex.moves.get(shinyMove[species][1]);
@@ -369,7 +366,9 @@ export const Scripts: ModdedBattleScriptsData = {
 			}
 
 			if (
-				!ignoreImmunities && status.id && !((source?.hasAbility('corrosion') || (((sourceEffect as Move).id === 'corrosivejab')) && !this.types.includes('Poison')) && ['tox', 'psn'].includes(status.id))
+				!ignoreImmunities && status.id && !((source?.hasAbility('corrosion') ||
+					(((sourceEffect as Move).id === 'corrosivejab')) && !this.types.includes('Poison')) &&
+					['tox', 'psn'].includes(status.id))
 			) {
 				// the game currently never ignores immunities
 				if (!this.runStatusImmunity(status.id === 'tox' ? 'psn' : status.id)) {
@@ -410,5 +409,5 @@ export const Scripts: ModdedBattleScriptsData = {
 			}
 			return true;
 		},
-	}
+	},
 };

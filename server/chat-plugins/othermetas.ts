@@ -963,7 +963,7 @@ export const commands: Chat.ChatCommands = {
 		const args = target.split(',');
 		if (!toID(args[0])) return this.parse('/help shiny');
 		this.runBroadcast();
-		let dex = Dex.dexes['shinymons'];
+		const dex = Dex.dexes['shinymons'];
 
 		let buffer = '';
 		const baseSpecies = Utils.deepClone(dex.species.get(args[0]));
@@ -1040,8 +1040,7 @@ export const commands: Chat.ChatCommands = {
 
 		buffer += `|raw|${Chat.getDataPokemonHTML(species, dex.gen)}\n`;
 		buffer += `|raw|<font size="1">${Object.entries(details).map(([detail, value]) => (
-				value === '' ? detail : `<font color="#686868">${detail}:</font> ${value}`
-			)).join("&nbsp;|&ThickSpace;")}</font>\n`;
+			value === '' ? detail : `<font color="#686868">${detail}:</font> ${value}`)).join("&nbsp;|&ThickSpace;")}</font>\n`;
 		this.sendReply(buffer);
 	},
 	'shinymonshelp': [
