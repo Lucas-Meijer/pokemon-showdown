@@ -1030,7 +1030,7 @@ export const commands: Chat.ChatCommands = {
 			}
 		}
 		if (baseSpecies.prevo) {
-			details["Pre-Evolution"] = baseSpecies.prevo;
+			details["Pre-Evolution"] = baseSpecies.prevo + "-Shiny";
 		}
 		if (!evos.length) {
 			details[`<font color="#686868">Does Not Evolve</font>`] = "";

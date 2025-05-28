@@ -162,4 +162,54 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			stoneedge: ["9M"],
 		}
 	},
+	anorithshiny: {
+		learnset: {
+			crushclaw: ["9M"],
+		}
+	},
+	armaldoshiny: {
+		learnset: {
+			crushclaw: ["9M"],
+		}
+	},
+	walkingwakeshiny: {
+		learnset: {
+			freezedry: ["9M"],
+			iceburn: ["9M"],
+			hypervoice: ["9M"],
+		}
+	},
+	taillowshiny: {
+		learnset: {
+			wildcharge: ["9M"],
+			voltswitch: ["9M"],
+			volttackle: ["9M"],
+			boltbeak: ["9M"],
+			discharge: ["9M"],
+			leafblade: ["9M"],
+			leafstorm: ["9M"],
+			seedbomb: ["9M"],
+			seedflare: ["9M"],
+		}
+	},
+	swellowshiny: {
+		learnset: {
+			wildcharge: ["9M"],
+			voltswitch: ["9M"],
+			volttackle: ["9M"],
+			boltbeak: ["9M"],
+			discharge: ["9M"],
+			leafblade: ["9M"],
+			leafstorm: ["9M"],
+			seedbomb: ["9M"],
+			seedflare: ["9M"],
+		}
+	},
+	carbinkshiny: {
+		learnset: {
+			rapidspin: ["9M"],
+			roost: ["9M"],
+			hurricane: ["9M"],
+		}
+	},
 };

@@ -33,6 +33,9 @@ export const Scripts: ModdedBattleScriptsData = {
 					'Weezing-Galar': ['strangesteam', 'heatdeath'],
 					'Slowbro': ['icepunch', 'rockslap'],
 					'Dusknoir': ['shadowpunch', 'jawsoflife'],
+					'Armaldo': ['crushclaw', 'apexclaw'],
+					'Walking Wake': ['freezedry', 'chillingstream'],
+					'Carbink': ['roost', 'ascension'],
 				};
 				if (Object.keys(shinyMove).includes(pokemon.name)) {
 					const shinyMoveIndex = pokemon.baseMoves.indexOf(shinyMove[species][0]);

@@ -169,4 +169,68 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		type: "Ghost",
 		contestType: "Clever",
 	},
+	apexclaw: {
+		num: -1010,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		desc: "Has a 100% chance to lower the target's Defense by 1 stage.",
+		shortDesc: "100% chance to lower the target's Defense by 1.",
+		name: "Apex Claw",
+		pp: 5,
+		priority: 0,
+		flags: { contact: 1, protect: 1, mirror: 1, metronome: 1 },
+		secondary: {
+			chance: 100,
+			boosts: {
+				def: -1,
+			},
+		},
+		target: "normal",
+		type: "Rock",
+		contestType: "Tough",
+	},
+	chillingstream: {
+		num: -1011,
+		accuracy: 90,
+		basePower: 70,
+		category: "Special",
+		desc: "This move's type effectiveness against Fire is changed to be super effective no matter what this move's type is.",
+		shortDesc: "Super effective on Fire.",
+		name: "Chilling Stream",
+		pp: 20,
+		priority: 0,
+		flags: { protect: 1, mirror: 1, metronome: 1 },
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Fire') return 1;
+		},
+		target: "normal",
+		type: "Ice",
+		contestType: "Beautiful",
+	},
+	ascension: {
+		num: -1012,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Ascension",
+		pp: 5,
+		priority: 0,
+		flags: { snatch: 1, heal: 1, metronome: 1 },
+		heal: [1, 2],
+		self: {
+			volatileStatus: 'telekinesis',
+		},
+		onHitField(target, source) {
+			for (const pokemon of this.getAllActive()) {
+				pokemon.addVolatile('telekinesis');
+				pokemon.volatiles['telekinesis'].duration = 0;
+			}
+		},
+		secondary: null,
+		target: "all",
+		type: "Flying",
+		zMove: { effect: 'clearnegativeboost' },
+		contestType: "Beautiful",
+	},
 };
