@@ -212,4 +212,28 @@ export const Learnsets: import('../../../sim/dex-species').ModdedLearnsetDataTab
 			hurricane: ["9M"],
 		}
 	},
+	sandileshiny: {
+		learnset: {
+			psychicfangs: ["9M"],
+			zenheadbutt: ["9M"],
+			jawlock: ["9M"],
+			gravity: ["9M"],
+		}
+	},
+	krokorokshiny: {
+		learnset: {
+			psychicfangs: ["9M"],
+			zenheadbutt: ["9M"],
+			jawlock: ["9M"],
+			gravity: ["9M"],
+		}
+	},
+	krookodileshiny: {
+		learnset: {
+			psychicfangs: ["9M"],
+			zenheadbutt: ["9M"],
+			jawlock: ["9M"],
+			gravity: ["9M"],
+		}
+	}
 };

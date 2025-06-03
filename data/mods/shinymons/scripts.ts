@@ -36,6 +36,8 @@ export const Scripts: ModdedBattleScriptsData = {
 					'Armaldo': ['crushclaw', 'apexclaw'],
 					'Walking Wake': ['freezedry', 'chillingstream'],
 					'Carbink': ['roost', 'ascension'],
+					'Krookodile': ['bulldoze', 'sandmaw'],
+					'Smeargle': ['sketch', 'wrongstroke'],
 				};
 				if (Object.keys(shinyMove).includes(pokemon.name)) {
 					const shinyMoveIndex = pokemon.baseMoves.indexOf(shinyMove[species][0]);

@@ -1140,7 +1140,10 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	smeargle: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	smeargleshiny: {
+		tier: "OU",
 	},
 	miltank: {
 		tier: "Illegal",
@@ -2181,13 +2184,22 @@ export const FormatsData: import('../../../sim/dex-species').ModdedSpeciesFormat
 		tier: "Illegal",
 	},
 	sandile: {
-		tier: "Illegal",
+		tier: "LC",
+	},
+	sandileshiny: {
+		tier: "LC",
 	},
 	krokorok: {
-		tier: "Illegal",
+		tier: "NFE",
+	},
+	krokorokshiny: {
+		tier: "NFE",
 	},
 	krookodile: {
-		tier: "Illegal",
+		tier: "OU",
+	},
+	krookodileshiny: {
+		tier: "OU",
 	},
 	darumaka: {
 		tier: "Illegal",

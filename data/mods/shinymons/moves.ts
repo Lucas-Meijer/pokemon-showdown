@@ -233,4 +233,55 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		zMove: { effect: 'clearnegativeboost' },
 		contestType: "Beautiful",
 	},
+	sandmaw: {
+		num: -1013,
+		accuracy: 100,
+		basePower: 70,
+		category: "Physical",
+		name: "Sand Maw",
+		pp: 20,
+		priority: 0,
+		flags: { protect: 1, mirror: 1, nonsky: 1, metronome: 1 },
+		condition: {
+			duration: 2,
+			onTrapPokemon(pokemon) {
+				pokemon.tryTrap();
+			},
+		},
+		secondary: null,
+		target: "allAdjacent",
+		type: "Ground",
+		contestType: "Tough",
+	},
+	wrongstroke: {
+		num: -1014,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Wrong Stroke",
+		pp: 20,
+		priority: 0,
+		flags: { protect: 1, reflectable: 1, mirror: 1, allyanim: 1, metronome: 1 },
+		sideCondition: 'wrongstroke',
+		onHit(target) {
+			if (target.getTypes().join() === '???' || !target.setType('???')) {
+				this.add('-fail', target);
+				return null;
+			}
+			this.add('-start', target, 'typechange', '???');
+			target.setType('???');
+			target.m.wrongstroke = true;
+		},
+		condition: {
+			onSwitchIn(pokemon) {
+				if (!pokemon.m.wrongstroke) return;
+				pokemon.setType('???');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+		zMove: { boost: { spa: 1 } },
+		contestType: "Clever",
+	},
 };
