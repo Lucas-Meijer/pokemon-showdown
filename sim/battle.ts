@@ -310,7 +310,7 @@ export class Battle {
 		const sides: SideID[] = ['p1', 'p2', 'p3', 'p4'];
 		for (const side of sides) {
 			if (options[side]) {
-				this.setPlayer(side, options[side]);
+				this.setPlayer(side, options[side]!);
 			}
 		}
 	}
@@ -1346,12 +1346,15 @@ export class Battle {
 		if (this.sides.every(side => side.isChoiceDone())) {
 			throw new Error(`Choices are done immediately after a request`);
 		}
+
+		// if (this.ruleTable.has('autobattlermod') && (type === 'move' || type === 'switch')) this.makeChoices();
 	}
 
 	clearRequest() {
 		this.requestState = '';
 		for (const side of this.sides) {
 			side.activeRequest = null;
+			console.log(`${side}: ${side.activeRequest}`);
 			side.clearChoice();
 		}
 	}
@@ -2927,9 +2930,11 @@ export class Battle {
 	 * turn if all required choices have been made.
 	 */
 	choose(sideid: SideID, input: string) {
+		console.log("Hi1");
 		const side = this.getSide(sideid);
 
 		if (!side.choose(input)) {
+			console.log("Hi2");
 			if (!side.choice.error) {
 				side.emitChoiceError(`Unknown error for choice: ${input}. If you're not using a custom client, please report this as a bug.`);
 			}
@@ -2937,9 +2942,11 @@ export class Battle {
 		}
 
 		if (!side.isChoiceDone()) {
+			console.log("Hi3");
 			side.emitChoiceError(`Incomplete choice: ${input} - missing other pokemon`);
 			return false;
 		}
+		console.log("Hi4");
 		if (this.allChoicesDone()) this.commitChoices();
 		return true;
 	}
@@ -3219,9 +3226,10 @@ export class Battle {
 	sendUpdates() {
 		if (this.sentLogPos >= this.log.length) return;
 		this.send('update', this.log.slice(this.sentLogPos));
+
 		if (!this.sentRequests) {
-			for (const side of this.sides) side.emitRequest();
 			this.sentRequests = true;
+			for (const side of this.sides) side.emitRequest();
 		}
 		this.sentLogPos = this.log.length;
 

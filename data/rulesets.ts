@@ -3087,4 +3087,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
+	autobattlermod: {
+		effectType: 'Rule',
+		name: 'Auto-Battler Mod',
+		desc: "Automatically decides what moves to pick.",
+	},
 };

@@ -484,8 +484,14 @@ export class Side {
 	}
 
 	emitRequest(update: ChoiceRequest = this.activeRequest!) {
-		this.battle.send('sideupdate', `${this.id}\n|request|${JSON.stringify(update)}`);
 		this.activeRequest = update;
+		if (!this.battle.ruleTable.has('autobattlermod') || this.battle.ended || this.battle.turn < 1)
+			this.battle.send('sideupdate', `${this.id}\n|request|${JSON.stringify(update)}`);
+		else {
+			this.autoChoose();
+			this.battle!.choose(this.id, this.getChoice());
+			this.battle.sendUpdates();
+		}
 	}
 
 	emitChoiceError(

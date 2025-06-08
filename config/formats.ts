@@ -378,6 +378,13 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		},
 	}, */
 	{
+		name: "[Gen 9] Auto-Battler",
+		desc: `Randomized teams of Pok&eacute;mon with sets that are generated to be competitively viable.`,
+		mod: 'gen9',
+		team: 'random',
+		ruleset: ['PotD', 'Obtainable', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Illusion Level Mod', 'Auto-Battler Mod'],
+	},
+	{
 		name: "[Gen 9] CCAPM 2024 Random Battle",
 		desc: "A random battle format featuring Fakemon created during the Community Create-A-Pet Mod event in the Pet Mods room in 2024.",
 		mod: 'ccapm2024',
